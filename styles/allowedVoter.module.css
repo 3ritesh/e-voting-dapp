@@ -1,0 +1,218 @@
+.page {
+    min-height: 100vh;
+    padding-top: 90px;
+    position: relative;
+    z-index: 1;
+}
+
+.header {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 1.5rem;
+}
+
+.headerTag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.8rem;
+    background: rgba(79, 142, 247, 0.1);
+    border: 1px solid rgba(79, 142, 247, 0.2);
+    border-radius: 100px;
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.title {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* Content layout */
+.content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 2rem;
+    align-items: start;
+}
+
+/* Form Panel */
+.formPanel {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+}
+
+.formTitle {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.formFields {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.formActions {
+    margin-top: 1.75rem;
+    display: flex;
+    gap: 0.75rem;
+}
+
+/* Image upload */
+.imageUpload {
+    border: 2px dashed var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.22s ease;
+    background: var(--bg-secondary);
+}
+
+.imageUpload:hover {
+    border-color: var(--accent);
+    background: rgba(79, 142, 247, 0.03);
+}
+
+.imageUpload p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.uploadIcon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.previewImg {
+    width: 100%;
+    max-height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-top: 0.75rem;
+}
+
+/* Info/List Panel */
+.listPanel {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    position: sticky;
+    top: 90px;
+}
+
+.listTitle {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.countBadge {
+    background: rgba(79, 142, 247, 0.1);
+    color: var(--accent);
+    border: 1px solid rgba(79, 142, 247, 0.2);
+    border-radius: 100px;
+    padding: 0.15rem 0.6rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.listItems {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.listItem {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.7rem;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.listItemAvatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(79, 142, 247, 0.2), rgba(124, 92, 191, 0.2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.listItemAvatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.listItemName {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.listItemMeta {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-family: monospace;
+}
+
+/* Owner-only gate */
+.ownerGate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 3rem 1.5rem;
+    text-align: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    max-width: 480px;
+    margin: 2rem auto;
+}
+
+@media (max-width: 768px) {
+    .content {
+        grid-template-columns: 1fr;
+    }
+
+    .listPanel {
+        position: static;
+    }
+}

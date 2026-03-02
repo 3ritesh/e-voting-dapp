@@ -1,0 +1,262 @@
+/* ─── index.module.css ─── */
+
+.page {
+    min-height: 100vh;
+    padding-top: 90px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ─── Hero ─────────────────────────────────────────────────────────────────── */
+.hero {
+    text-align: center;
+    padding: 3rem 1.5rem 2rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.heroTag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 1rem;
+    background: rgba(79, 142, 247, 0.1);
+    border: 1px solid rgba(79, 142, 247, 0.25);
+    border-radius: 100px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+}
+
+.heroTitle {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+}
+
+.heroSubtitle {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* ─── Election Info Panel ───────────────────────────────────────────────────── */
+.electionPanel {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+.electionCard {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.electionInfo h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.electionMeta {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* Countdown */
+.countdown {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.countItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.6rem 0.9rem;
+    min-width: 60px;
+}
+
+.countNum {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+}
+
+.countLabel {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 2px;
+}
+
+.countSep {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+
+/* ─── Candidates Section ─────────────────────────────────────────────────────── */
+.candidatesSection {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+}
+
+.sectionHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.sectionTitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.sectionSubtitle {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+/* ─── Connect prompt ─────────────────────────────────────────────────────────── */
+.connectPrompt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 3rem;
+    text-align: center;
+    background: var(--bg-card);
+    border: 1px dashed var(--border);
+    border-radius: var(--radius-lg);
+    max-width: 480px;
+    margin: 3rem auto;
+}
+
+.connectPrompt h3 {
+    font-size: 1.2rem;
+}
+
+.connectPrompt p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* ─── Status badges ─────────────────────────────────────────────────────────── */
+.statusActive {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    background: rgba(34, 197, 94, 0.1);
+    color: var(--success);
+    border: 1px solid rgba(34, 197, 94, 0.25);
+}
+
+.statusEnded {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--danger);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.statusUpcoming {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--warning);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+/* ─── Winner banner ─────────────────────────────────────────────────────────── */
+.winner {
+    max-width: 900px;
+    margin: 1rem auto 0;
+    padding: 0 1.5rem;
+}
+
+.winnerCard {
+    background: linear-gradient(135deg, rgba(79, 142, 247, 0.1), rgba(124, 92, 191, 0.1));
+    border: 1px solid rgba(79, 142, 247, 0.3);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.winnerEmoji {
+    font-size: 3rem;
+}
+
+.winnerTitle {
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.2rem;
+}
+
+.winnerName {
+    font-size: 1.4rem;
+    font-weight: 800;
+}
+
+.winnerVotes {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+@media (max-width: 640px) {
+    .electionCard {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .countdown {
+        flex-wrap: wrap;
+    }
+}

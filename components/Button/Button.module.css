@@ -1,0 +1,125 @@
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.4rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.22s ease;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(255, 255, 255, 0.06), transparent);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.btn:hover::after {
+    opacity: 1;
+}
+
+/* Primary */
+.primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+    color: #fff;
+}
+
+.primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(79, 142, 247, 0.4);
+}
+
+/* Secondary */
+.secondary {
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+}
+
+.secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(79, 142, 247, 0.05);
+}
+
+/* Danger */
+.danger {
+    background: rgba(239, 68, 68, 0.15);
+    color: var(--danger);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.danger:hover {
+    background: var(--danger);
+    color: #fff;
+}
+
+/* Sizes */
+.sm {
+    padding: 0.4rem 0.9rem;
+    font-size: 0.82rem;
+}
+
+.lg {
+    padding: 0.85rem 2rem;
+    font-size: 1rem;
+}
+
+/* Full width */
+.full {
+    width: 100%;
+}
+
+/* Disabled */
+.btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* Loading state */
+.loading {
+    gap: 0.6rem;
+}
+
+.loadDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    animation: dotPulse 1.2s ease infinite;
+}
+
+.loadDot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.loadDot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes dotPulse {
+
+    0%,
+    80%,
+    100% {
+        opacity: 0.3;
+        transform: scale(0.8);
+    }
+
+    40% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

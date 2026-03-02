@@ -1,0 +1,76 @@
+.card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    transition: all 0.22s ease;
+}
+
+.card:hover {
+    border-color: var(--border-light);
+    background: var(--bg-card-hover);
+}
+
+/* Avatar / image */
+.avatarWrapper {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(79, 142, 247, 0.15), rgba(124, 92, 191, 0.15));
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.avatarWrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Info */
+.info {
+    flex: 1;
+    min-width: 0;
+}
+
+.name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.15rem;
+}
+
+.address {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-family: monospace;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Right side status */
+.status {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.3rem;
+    flex-shrink: 0;
+}
+
+.votedIcon {
+    font-size: 1.1rem;
+}
+
+.voterId {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}

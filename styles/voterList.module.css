@@ -1,0 +1,126 @@
+.page {
+    min-height: 100vh;
+    padding-top: 90px;
+    position: relative;
+    z-index: 1;
+}
+
+.header {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 1.5rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.headerLeft {}
+
+.headerTag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.8rem;
+    background: rgba(79, 142, 247, 0.1);
+    border: 1px solid rgba(79, 142, 247, 0.2);
+    border-radius: 100px;
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.title {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 800;
+    margin-bottom: 0.35rem;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* Stats */
+.stats {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.statCard {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.8rem 1.2rem;
+    text-align: center;
+    min-width: 80px;
+}
+
+.statNum {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+}
+
+.statLabel {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-top: 2px;
+}
+
+/* Search bar */
+.searchBar {
+    max-width: 1100px;
+    margin: 0 auto 1.5rem;
+    padding: 0 1.5rem;
+}
+
+/* Table / List */
+.listContainer {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+}
+
+.voterGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+/* Filters */
+.filters {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.filterBtn {
+    padding: 0.4rem 0.9rem;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: var(--bg-secondary);
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.filterBtn.active {
+    border-color: var(--accent);
+    background: rgba(79, 142, 247, 0.1);
+    color: var(--accent);
+}
+
+.filterBtn:hover:not(.active) {
+    border-color: var(--border-light);
+    color: var(--text-secondary);
+}

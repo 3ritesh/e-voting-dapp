@@ -257,6 +257,21 @@ export const VoterProvider = ({ children }) => {
         }
     }, []);
 
+    // ─── Disconnect Wallet ─────────────────────────────────────────────────────
+    const disconnectWallet = () => {
+        setCurrentAccount(null);
+        setIsOwner(false);
+        setCurrentVoter(null);
+        
+        // Note: web3Modal caches the provider. We need to clear it so 
+        // the user has to re-authenticate on their next login attempt.
+        const web3Modal = new Web3Modal();
+        web3Modal.clearCachedProvider();
+        
+        setError("");
+        console.log("Wallet disconnected successfully");
+    };
+
     return (
         <VoterContext.Provider
             value={{
@@ -271,6 +286,7 @@ export const VoterProvider = ({ children }) => {
                 loading,
                 // Functions
                 connectWallet,
+                disconnectWallet,
                 createElection,
                 registerCandidate,
                 giveVoterRight,

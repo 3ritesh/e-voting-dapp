@@ -5,7 +5,7 @@ import { VoterContext } from "../../context/Voter";
 import styles from "./NavBar.module.css";
 
 const NavBar = () => {
-    const { connectWallet, currentAccount, isOwner } = useContext(VoterContext);
+    const { connectWallet, disconnectWallet, currentAccount, isOwner } = useContext(VoterContext);
     const [menuOpen, setMenuOpen] = useState(false);
     const router = useRouter();
 
@@ -61,6 +61,9 @@ const NavBar = () => {
                                 <span className={styles.accountDot}></span>
                                 {truncate(currentAccount)}
                             </div>
+                            <button className={styles.logoutBtn} onClick={disconnectWallet}>
+                                Logout
+                            </button>
                         </>
                     ) : (
                         <button className={styles.connectBtn} onClick={connectWallet}>

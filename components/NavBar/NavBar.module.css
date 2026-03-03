@@ -124,6 +124,23 @@
     box-shadow: 0 4px 16px rgba(79, 142, 247, 0.4);
 }
 
+.logoutBtn {
+    padding: 0.4rem 0.9rem;
+    background: transparent;
+    color: var(--error, #ff4d4d);
+    border: 1px solid var(--error, #ff4d4d);
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.22s ease;
+}
+
+.logoutBtn:hover {
+    background: rgba(255, 77, 77, 0.1);
+    transform: translateY(-1px);
+}
+
 /* Mobile menu toggle */
 .hamburger {
     display: none;

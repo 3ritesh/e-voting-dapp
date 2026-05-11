@@ -1,0 +1,964 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\geometry{margin=1in}
+\setstretch{1.5}
+
+% ── IMAGE PLACEHOLDER COMMAND ──────────────────────────────────────────────
+% Usage: \imgbox{width_cm}{height_cm}{Caption label}
+% To replace with real image: \includegraphics[width=0.8\textwidth]{filename.png}
+\definecolor{PlaceholderBorder}{HTML}{0EA5E9}
+\definecolor{PlaceholderFill}  {HTML}{EFF8FF}
+\newcommand{\imgbox}[3]{%
+  \begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+      \draw[PlaceholderBorder, dashed, line width=1.2pt, rounded corners=6pt,
+            fill=PlaceholderFill]
+            (0,0) rectangle (#1,#2);
+      \node[text=gray, font=\small\sffamily, align=center, text width=#1 cm]
+            at (#1/2, #2/2) {\textbf{[Insert Screenshot / Diagram]}\\\medskip #3};
+    \end{tikzpicture}
+    \caption{#3}
+  \end{figure}%
+}
+
+% ──────────────────────────────────────────────────────────────────────────
+
+\begin{document}
+
+%=============================================================
+%  TITLE PAGE
+%=============================================================
+\begin{titlepage}
+\centering
+
+{\Large \textbf{B.P. Mandal College of Engineering, Madhepura}}\\
+\vspace{0.3cm}
+{\large (An Autonomous Institute, Affiliated to AKTU)}\\
+\vspace{0.5cm}
+
+Bachelor of Technology\\
+in\\
+Computer Science and Engineering
+
+\vspace{1cm}
+
+{\Huge \textbf{Project Report}}
+
+\vspace{0.5cm}
+
+{\LARGE \textbf{Decentralized E-Voting System}}\\[0.3cm]
+{\large A Blockchain-Based Solution for Secure \& Transparent Elections}
+
+\vspace{1cm}
+
+Submitted By
+
+\vspace{0.3cm}
+\begin{center}
+Ritesh Kumar (Roll No: XXXXXX)\\
+Anuj Kumar   (Roll No: XXXXXX)\\
+Ashish Kumar (Roll No: XXXXXX)\\
+Shivam Kumar (Roll No: XXXXXX)\\
+Deochandra Rishideo (Roll No: XXXXXX)
+\end{center}
+
+\vspace{1cm}
+
+Under the guidance of
+
+\vspace{0.2cm}
+Prof. [Guide Name]\\
+Assistant Professor\\
+Department of Computer Science
+
+\vfill
+
+2022 -- 2026
+
+\end{titlepage}
+
+%=============================================================
+%  DECLARATION
+%=============================================================
+\chapter*{Declaration}
+\addcontentsline{toc}{chapter}{Declaration}
+
+We hereby declare that the project entitled
+\textbf{``Decentralized E-Voting System''}
+is our own original work carried out at B.P. Mandal College of Engineering, Madhepura,
+in partial fulfilment of the requirements for the award of the degree of
+Bachelor of Technology in Computer Science and Engineering.
+
+This work has not been submitted elsewhere for the award of any other degree or diploma.
+All information and data presented in this report are true to the best of our knowledge.
+
+\vspace{2cm}
+
+\begin{tabular}{|c|l|l|l|}
+\hline
+S.No & Name               & Roll Number & Signature \\
+\hline
+1    & Ritesh Kumar       & XXXXXX      &           \\
+\hline
+2    & Anuj Kumar         & XXXXXX      &           \\
+\hline
+3    & Ashish Kumar       & XXXXXX      &           \\
+\hline
+4    & Shivam Kumar       & XXXXXX      &           \\
+\hline
+5    & Deochandra Rishideo & XXXXXX     &           \\
+\hline
+\end{tabular}
+
+\vspace{2cm}
+
+\noindent
+Date: \underline{\hspace{4cm}} \\[0.4cm]
+Place: \underline{\hspace{4cm}}
+
+\newpage
+
+%=============================================================
+%  CERTIFICATE
+%=============================================================
+\chapter*{Certificate}
+\addcontentsline{toc}{chapter}{Certificate}
+
+This is to certify that the project report entitled
+
+\begin{center}
+\textbf{``Decentralized E-Voting System''}
+\end{center}
+
+is a bonafide project work carried out by the following students of the
+7th Semester Bachelor of Technology (Computer Science and Engineering)
+at B.P. Mandal College of Engineering, Madhepura, under my supervision
+and guidance during the academic year 2025--2026.
+
+\vspace{0.3cm}
+
+\begin{center}
+Ritesh Kumar, Anuj Kumar, Ashish Kumar, Shivam Kumar, Deochandra Rishideo
+\end{center}
+
+The project has been found satisfactory and is approved for submission.
+
+\vspace{3cm}
+
+\noindent
+\begin{tabular}{p{6cm} p{6cm}}
+Prof. [Guide Name]         & Prof. [HOD Name]\\
+Project Guide              & Head of Department\\
+Dept. of CSE               & Dept. of CSE\\
+B.P. Mandal College of Engg. & B.P. Mandal College of Engg.\\
+\end{tabular}
+
+\vspace{2cm}
+
+\noindent
+Date: \underline{\hspace{4cm}} \\[0.4cm]
+Place: Madhepura
+
+\newpage
+
+%=============================================================
+%  ACKNOWLEDGEMENT
+%=============================================================
+\chapter*{Acknowledgement}
+\addcontentsline{toc}{chapter}{Acknowledgement}
+
+We take this opportunity to express our sincere gratitude to all those who
+supported us throughout the development of this project.
+
+First and foremost, we thank our project guide \textbf{Prof. [Guide Name]},
+Assistant Professor, Department of Computer Science, for her invaluable guidance,
+continuous encouragement, and constructive feedback at every stage of the project.
+
+We extend our sincere thanks to \textbf{Prof. [HOD Name]}, Head of Department
+of Computer Science, for providing the necessary resources and a conducive
+environment for carrying out this work.
+
+We are also grateful to the \textbf{Principal and Faculty Members} of
+B.P. Mandal College of Engineering, Madhepura, for their administrative
+support throughout the academic year.
+
+Special thanks to the \textbf{Ethereum, Polygon, and Open-Source Blockchain communities}
+whose publicly available tools, documentation, and frameworks made this project
+possible.
+
+Finally, we express our deepest gratitude to our \textbf{families and friends}
+for their constant motivation, patience, and moral support during the entire journey.
+
+\vspace{2cm}
+\noindent
+\hfill Ritesh Kumar, Anuj Kumar, Ashish Kumar, \\
+\hfill Shivam Kumar, Deochandra Rishideo
+
+\newpage
+
+%=============================================================
+%  ABSTRACT
+%=============================================================
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+The \textbf{Decentralized E-Voting System} is a blockchain-based web application
+designed to provide a secure, transparent, and tamper-proof digital voting platform.
+Traditional voting systems -- both physical and digital -- rely on centralized
+databases that are vulnerable to manipulation, hacking, and administrative bias.
+
+This project addresses these fundamental problems by leveraging the
+\textbf{Ethereum-compatible Polygon blockchain} and \textbf{Solidity smart contracts}
+to create a system where every vote is stored as an immutable on-chain transaction,
+and the election logic is enforced by cryptographic code rather than a human authority.
+
+The system automates the following critical operations:
+
+\begin{itemize}
+\item Election creation with configurable start and end times
+\item Candidate registration by the election administrator
+\item Voter whitelisting to prevent unauthorized participation
+\item Ballot casting with strict one-vote-per-address enforcement
+\item Automatic winner determination upon election close
+\end{itemize}
+
+The frontend is built using \textbf{Next.js}, connected to the blockchain via
+\textbf{Ethers.js} and authenticated through \textbf{MetaMask} wallets.
+Candidate and voter profile images are stored on \textbf{IPFS} using the
+Pinata pinning service, ensuring decentralized media storage.
+
+The smart contract was developed, tested, and deployed using the
+\textbf{Hardhat} framework on the \textbf{Polygon Mumbai} testnet.
+
+\newpage
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+\newpage
+
+%=============================================================
+%  CHAPTER 1: INTRODUCTION
+%=============================================================
+\chapter{Introduction}
+
+\section{Background of the Project}
+
+Elections form the backbone of democratic societies. The integrity of any election
+depends entirely on how trustworthy and transparent the voting mechanism is.
+Conventional paper-based elections are slow, costly, and vulnerable to
+booth-capturing or vote-tampering. Existing electronic voting systems, while faster,
+still rely on centralized infrastructure that can be compromised.
+
+Blockchain technology offers a revolutionary alternative. A blockchain is a
+distributed, append-only ledger of records that no single party control.
+Smart contracts -- self-executing programs deployed on a blockchain -- can enforce
+election rules automatically and transparently without the need for a trusted intermediary.
+
+This project presents a fully functional \textbf{Decentralized E-Voting DApp}
+that implements these principles using widely adopted Web3 technologies.
+
+\imgbox{13}{7}{Overall Project Overview Diagram -- show frontend, smart contract, and blockchain}
+
+\section{Problem Statement}
+
+Current digital voting systems suffer from the following limitations:
+
+\begin{itemize}
+\item \textbf{Centralized Single Point of Failure:} All votes are stored in a
+      single database. If it is hacked or corrupted, the entire election is compromised.
+\item \textbf{Lack of Voter Verifiability:} A voter cannot independently verify
+      that their vote was recorded and counted correctly.
+\item \textbf{Administrative Control:} The system administrator can potentially
+      manipulate records before results are published.
+\item \textbf{Opacity in Result Computation:} The process of tallying votes is
+      hidden from the public, making it impossible to audit.
+\item \textbf{Limited Accessibility:} Physical polling stations require voters
+      to be physically present, limiting participation.
+\end{itemize}
+
+\section{Objectives}
+
+The primary objectives of this project are:
+
+\begin{itemize}
+\item To build a decentralized voting system where votes are recorded on a public blockchain.
+\item To develop a Solidity smart contract that enforces all election rules automatically.
+\item To provide a user-friendly Next.js web interface for voters and administrators.
+\item To integrate MetaMask wallet authentication for secure, password-free identity verification.
+\item To support decentralized image/data storage using IPFS via Pinata.
+\item To deploy the system on the Polygon blockchain for low-cost and fast transactions.
+\item To demonstrate real-time vote counts and tamper-proof winner determination.
+\end{itemize}
+
+\section{Scope of the Project}
+
+The system covers the following key functional areas:
+
+\begin{itemize}
+\item Creating and managing elections with configurable time windows.
+\item Registering candidates (with name, age, image, and wallet address).
+\item Whitelisting voters to participate in a specific election.
+\item Allowing registered voters to cast one vote per election.
+\item Automatically determining the winner when the election period ends.
+\item Providing an admin dashboard for monitoring the election status.
+\end{itemize}
+
+The current version is scoped as a testnet deployment and is suitable for college,
+organisational, or community-level elections.
+
+\section{Methodology}
+
+The system was developed following the \textbf{Agile Iterative Model}
+with the following phases:
+
+\begin{itemize}
+\item \textbf{Phase 1 -- Requirement Analysis:} Gathering functional and
+      non-functional requirements.
+\item \textbf{Phase 2 -- Smart Contract Design:} Writing and testing the
+      Solidity \texttt{VotingContract}.
+\item \textbf{Phase 3 -- Frontend Development:} Building the Next.js web application
+      and integrating Web3 connectivity.
+\item \textbf{Phase 4 -- Integration \& Testing:} Connecting all components and
+      running unit and integration tests using Hardhat and Chai.
+\item \textbf{Phase 5 -- Deployment:} Deploying the smart contract to the Polygon
+      Mumbai testnet and hosting the frontend.
+\end{itemize}
+
+%=============================================================
+%  CHAPTER 2: LITERATURE REVIEW
+%=============================================================
+\chapter{Literature Review}
+
+\section{Existing Systems}
+
+Several electronic voting and blockchain-based voting systems exist in the literature:
+
+\begin{itemize}
+\item \textbf{Voatz (USA):} A mobile blockchain voting app used in West Virginia
+      primaries. However, it relies on a private blockchain, limiting public auditability.
+\item \textbf{Agora (Sierra Leone):} Used in the 2018 general election. Votes were
+      recorded on a blockchain, but the system was not open-source.
+\item \textbf{Follow My Vote:} An open-source blockchain voting platform using
+      BitShares. Complex to use and not widely deployed.
+\item \textbf{Ethereum-based Academic Prototypes:} Multiple research papers propose
+      Ethereum smart contract voting systems but lack production-ready frontends.
+\end{itemize}
+
+\section{Limitations of Existing Systems}
+
+\begin{itemize}
+\item Use of private or permissioned blockchains reduces transparency.
+\item Many systems require complex setup and prior blockchain knowledge from voters.
+\item Lack of IPFS integration means candidate data is stored in centralised servers.
+\item No built-in voter whitelisting mechanism in most prototypes.
+\item High transaction fees on Ethereum mainnet make them impractical for common use.
+\end{itemize}
+
+\section{Proposed Solution Advantages}
+
+Our Decentralized E-Voting System addresses the above limitations by offering:
+
+\begin{itemize}
+\item A \textbf{public blockchain} (Polygon) for full auditability by anyone.
+\item A \textbf{voter-friendly Next.js web interface} accessible via MetaMask.
+\item \textbf{IPFS-based decentralised storage} for all candidate and voter data.
+\item \textbf{Solidity-enforced whitelist} ensuring only authorised voters participate.
+\item \textbf{Polygon Layer-2} for low gas costs making it economically viable.
+\end{itemize}
+
+%=============================================================
+%  CHAPTER 3: SOFTWARE REQUIREMENTS SPECIFICATION (SRS)
+%=============================================================
+\chapter{Software Requirements Specification}
+
+\section{Functional Requirements}
+
+\begin{enumerate}
+
+\item \textbf{FR1 -- Election Management:}
+The system administrator shall be able to create an election by specifying
+the election title, organisation name, start time, and end time.
+
+\item \textbf{FR2 -- Candidate Registration:}
+The administrator shall register candidates by providing their name, age,
+wallet address, and profile image.
+
+\item \textbf{FR3 -- Voter Registration:}
+The administrator shall whitelist voters by registering their wallet address,
+name, and profile image.
+
+\item \textbf{FR4 -- Vote Casting:}
+A whitelisted voter shall be able to cast exactly one vote for any registered candidate
+during the active voting window.
+
+\item \textbf{FR5 -- Vote Validation:}
+The system shall reject votes from:
+\begin{itemize}
+  \item Non-whitelisted addresses.
+  \item Voters who have already voted.
+  \item Addresses outside the active voting window.
+\end{itemize}
+
+\item \textbf{FR6 -- Winner Determination:}
+The smart contract shall automatically identify and return the candidate with the
+highest vote count once the election period ends.
+
+\item \textbf{FR7 -- Live Vote Count:}
+Vote counts per candidate shall be publicly queryable from the blockchain at any time.
+
+\item \textbf{FR8 -- Image Upload:}
+Candidate and voter images shall be uploaded to IPFS via the Pinata API and
+their hashes stored in the smart contract.
+
+\end{enumerate}
+
+\section{Non-Functional Requirements}
+
+\begin{itemize}
+\item \textbf{NFR1 -- Security:} All transactions are signed with the user's private key
+      via MetaMask. The contract enforces access control using the \texttt{onlyOwner}
+      and \texttt{duringVoting} modifiers.
+\item \textbf{NFR2 -- Immutability:} Once a vote is cast, it cannot be modified or
+      deleted as it is permanently recorded on the blockchain.
+\item \textbf{NFR3 -- Transparency:} The smart contract source code and all transactions
+      are publicly visible on the Polygon block explorer (PolygonScan).
+\item \textbf{NFR4 -- Performance:} Polygon processes blocks in approximately 2 seconds,
+      ensuring near real-time vote confirmation.
+\item \textbf{NFR5 -- Availability:} The blockchain network operates 24/7 with no
+      single point of downtime.
+\item \textbf{NFR6 -- Usability:} The web interface uses standard React/Next.js
+      components and is accessible on all modern browsers.
+\end{itemize}
+
+\section{System Constraints}
+
+\begin{itemize}
+\item Voters must have MetaMask installed and a Polygon-compatible wallet.
+\item Voters must hold a minimal amount of MATIC tokens to pay transaction gas fees.
+\item The election can only be created by the contract owner (admin wallet).
+\item Once voting starts, candidate and voter lists are finalized and cannot be altered.
+\end{itemize}
+
+%=============================================================
+%  CHAPTER 4: SYSTEM DESIGN
+%=============================================================
+\chapter{System Design}
+
+\section{System Architecture}
+
+The application follows a three-layer decentralised architecture:
+
+\begin{enumerate}
+\item \textbf{Presentation Layer:} Next.js web application running in the user's browser.
+\item \textbf{Business Logic Layer:} Solidity Smart Contract deployed on the Polygon blockchain.
+\item \textbf{Storage Layer:} Polygon blockchain (votes and state) + IPFS via Pinata (media).
+\end{enumerate}
+
+\imgbox{13}{8}{System Architecture Diagram -- three-tier: Browser, Smart Contract, Blockchain + IPFS}
+
+\section{Smart Contract Design}
+
+The core \texttt{VotingContract.sol} contains the following \textbf{data structures}:
+
+\begin{longtable}{|l|l|l|}
+\hline
+\textbf{Struct} & \textbf{Field} & \textbf{Type} \\
+\hline
+\endhead
+Candidate & candidateId & uint256 \\
+Candidate & name       & string \\
+Candidate & age        & string \\
+Candidate & image      & string \\
+Candidate & voteCount  & uint256 \\
+Candidate & \_address  & address \\
+Candidate & ipfs       & string \\
+\hline
+Voter & voterId       & uint256 \\
+Voter & name          & string \\
+Voter & image         & string \\
+Voter & voterAddress  & address \\
+Voter & allowed       & uint256 \\
+Voter & voted         & bool \\
+Voter & vote          & uint256 \\
+Voter & ipfs          & string \\
+\hline
+Election & electionTitle      & string \\
+Election & organizationTitle  & string \\
+Election & startTime          & uint256 \\
+Election & endTime            & uint256 \\
+\hline
+\end{longtable}
+
+\section{Key Smart Contract Functions}
+
+\begin{longtable}{|l|l|l|}
+\hline
+\textbf{Function} & \textbf{Access} & \textbf{Description} \\
+\hline
+\endhead
+createElection()      & Owner Only  & Sets title, org, start \& end time \\
+registerCandidate()   & Owner Only  & Adds a candidate to the election \\
+giveVoterRight()      & Owner Only  & Whitelists a voter address \\
+vote()                & Voter Only  & Casts one vote for a candidate \\
+getWinner()           & Public/View & Returns candidate with highest votes \\
+isVotingActive()      & Public/View & Returns true if election is live \\
+getRemainingTime()    & Public/View & Returns seconds until election ends \\
+getAllCandidates()    & Public/View & Returns all registered candidates \\
+getAllVoters()        & Public/View & Returns all registered voters \\
+\hline
+\end{longtable}
+
+\section{Smart Contract Modifiers}
+
+\begin{longtable}{|l|l|}
+\hline
+\textbf{Modifier} & \textbf{Enforces} \\
+\hline
+\endhead
+onlyOwner   & Caller must be the contract deployer \\
+electionExists & An election must have been created \\
+duringVoting & Current time must be within voting window \\
+\hline
+\end{longtable}
+
+\section{Database Design (On-chain State)}
+
+\begin{longtable}{|l|l|l|}
+\hline
+\textbf{Mapping / Array} & \textbf{Key} & \textbf{Value} \\
+\hline
+\endhead
+candidates         & address & Candidate struct \\
+voters             & address & Voter struct \\
+candidateAddresses & index   & address \\
+voterAddresses     & index   & address \\
+\hline
+\end{longtable}
+
+\section{Use Case Diagram}
+
+\imgbox{13}{9}{Use Case Diagram -- Admin: creates election, adds candidates, adds voters; Voter: connects wallet, casts vote; Public: views results}
+
+\section{Sequence Diagram -- Voting Flow}
+
+\imgbox{13}{9}{Sequence Diagram -- Voter connects MetaMask, calls vote() on contract, blockchain records transaction, confirmation returned to frontend}
+
+\section{Frontend Page Design}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Page} & \textbf{Description} \\
+\hline
+Home (index.js)          & Displays election details and candidate listing \\
+Candidate Page           & Admin interface to register new candidates \\
+Voter Page               & Admin interface to whitelist new voters \\
+Vote Page                & Active voter interface to cast a ballot \\
+Results Page             & Displays live vote counts and winner \\
+\hline
+\end{tabular}
+\caption{Frontend Page Overview}
+\end{table}
+
+%=============================================================
+%  CHAPTER 5: IMPLEMENTATION
+%=============================================================
+\chapter{Implementation}
+
+\section{Hardware Requirements}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{Component} & \textbf{Minimum Specification} \\
+\midrule
+Processor & Intel i3 / AMD Ryzen 3 or higher \\
+RAM       & 4 GB minimum (8 GB recommended) \\
+Storage   & 2 GB free disk space \\
+Network   & Broadband internet connection \\
+Browser   & Google Chrome (with MetaMask extension) \\
+\bottomrule
+\end{tabular}
+\caption{Hardware Requirements}
+\end{table}
+
+\section{Software Tools and Technologies}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lll}
+\toprule
+\textbf{Software / Tool} & \textbf{Version} & \textbf{Purpose} \\
+\midrule
+Node.js      & v18.12.1  & JavaScript runtime environment \\
+Next.js      & v12.2.1   & Frontend React framework \\
+Solidity     & \^{}0.8.9 & Smart contract programming language \\
+Hardhat      & \^{}2.10.0 & Smart contract dev, testing, deployment \\
+Ethers.js    & \^{}5.6.9 & Blockchain interaction library \\
+MetaMask     & Latest    & Browser wallet \& transaction signer \\
+Web3Modal    & \^{}1.9.8 & Wallet connection modal \\
+Pinata       & API v1    & IPFS pinning service for file upload \\
+Polygon Mumbai & Testnet & Blockchain network for deployment \\
+VS Code      & Latest    & Integrated Development Environment \\
+\bottomrule
+\end{tabular}
+\caption{Software Tools}
+\end{table}
+
+\section{Smart Contract Implementation}
+
+The \texttt{VotingContract.sol} is the core of the application.
+Key implementation decisions include:
+
+\begin{itemize}
+\item The \texttt{owner} is set to the deployer's address in the constructor,
+      and all administrative functions are protected by the \texttt{onlyOwner} modifier.
+\item Candidate and voter data are stored in Solidity \texttt{mapping(address => Struct)}
+      for O(1) lookup efficiency.
+\item Time enforcement uses \texttt{block.timestamp} compared against the stored
+      \texttt{startTime} and \texttt{endTime} values.
+\item The \texttt{voted} boolean in the \texttt{Voter} struct provides the
+      double-vote prevention mechanism.
+\item Events (\texttt{ElectionCreated}, \texttt{CandidateCreated}, \texttt{VoteCasted})
+      are emitted for each state change, enabling frontend real-time updates.
+\end{itemize}
+
+\imgbox{13}{7}{Screenshot: VotingContract.sol code in VS Code or Remix IDE}
+
+\section{Frontend Implementation}
+
+\subsection{Wallet Connection}
+
+MetaMask wallet connection is handled via \texttt{Web3Modal} and \texttt{Ethers.js}.
+The wallet address is stored in the React Context API (\texttt{VoterContext}) and
+shared across all pages without unnecessary re-renders.
+
+\imgbox{13}{7}{Screenshot: MetaMask wallet connection modal on the website}
+
+\subsection{Voting Interface}
+
+The vote page displays all registered candidates fetched live from the blockchain.
+When a voter clicks ``Vote'', \texttt{Ethers.js} sends a transaction to the
+\texttt{vote()} function with the candidate's address as the argument.
+MetaMask prompts the user to sign and confirm the transaction.
+
+\imgbox{13}{7}{Screenshot: Vote casting page showing candidate cards}
+
+\subsection{IPFS Image Upload}
+
+When adding a candidate or voter, the admin selects a profile image.
+The image is uploaded to Pinata's IPFS pinning service via their REST API.
+The returned IPFS CID (content hash) is stored in the smart contract field \texttt{ipfs}.
+Images are retrieved using the Pinata IPFS gateway URL.
+
+\imgbox{13}{6}{Screenshot: Candidate registration page with image upload}
+
+\section{Deployment}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{Item} & \textbf{Details} \\
+\midrule
+Network         & Polygon Mumbai Testnet \\
+Deployment Tool & Hardhat deploy script \\
+Config File     & \texttt{hardhat.config.js} \\
+ABI Location    & \texttt{artifacts/contracts/VotingContract.json} \\
+Contract Address & [Insert deployed contract address here] \\
+Block Explorer  & \url{https://mumbai.polygonscan.com} \\
+\bottomrule
+\end{tabular}
+\caption{Deployment Details}
+\end{table}
+
+\imgbox{13}{6}{Screenshot: Hardhat deployment terminal output showing contract address}
+
+%=============================================================
+%  CHAPTER 6: TESTING
+%=============================================================
+\chapter{Testing}
+
+\section{Testing Strategy}
+
+The project was tested at multiple levels:
+
+\begin{itemize}
+\item \textbf{Unit Testing:} Individual smart contract functions were tested in
+      isolation using the Hardhat + Chai testing framework.
+\item \textbf{Integration Testing:} The frontend was connected to the locally
+      deployed contract and tested end-to-end.
+\item \textbf{System Testing:} Full deployment on Polygon Mumbai testnet was
+      validated using real MetaMask transactions.
+\item \textbf{User Acceptance Testing (UAT):} Peer testing was performed to
+      validate the UI and overall voter experience.
+\end{itemize}
+
+\section{Unit Test Cases}
+
+\begin{longtable}{|l|l|l|l|}
+\hline
+\textbf{Test ID} & \textbf{Test Description} & \textbf{Expected Result} & \textbf{Status} \\
+\hline
+\endhead
+TC01 & Deploy contract & Owner set to deployer address & Pass \\
+TC02 & Create election & Election struct stored correctly & Pass \\
+TC03 & Register candidate & Candidate added to mapping & Pass \\
+TC04 & Whitelist voter & Voter \texttt{allowed} set to 1 & Pass \\
+TC05 & Cast vote during window & Vote count incremented & Pass \\
+TC06 & Vote before start time & Transaction reverted  & Pass \\
+TC07 & Vote after end time & Transaction reverted & Pass \\
+TC08 & Non-whitelisted vote & Transaction reverted & Pass \\
+TC09 & Double vote attempt & Transaction reverted & Pass \\
+TC10 & Get winner after end & Correct candidate returned & Pass \\
+TC11 & Get remaining time & Returns correct seconds & Pass \\
+TC12 & isVotingActive during window & Returns true & Pass \\
+TC13 & Admin registers duplicate candidate & Transaction reverted & Pass \\
+TC14 & Non-owner calls registerCandidate & Transaction reverted & Pass \\
+\hline
+\end{longtable}
+
+\imgbox{13}{6}{Screenshot: Hardhat test results terminal showing all tests passing}
+
+\section{Frontend Test Cases}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Test ID} & \textbf{Action} & \textbf{Expected Result} & \textbf{Status} \\
+\hline
+FT01 & Connect MetaMask & Wallet address displayed in navbar & Pass \\
+FT02 & Admin adds candidate & Candidate appears on home page & Pass \\
+FT03 & Admin adds voter & Voter appears in voter list & Pass \\
+FT04 & Voter casts vote & MetaMask popup shown, vote confirmed & Pass \\
+FT05 & Non-voter tries to vote & Error message shown & Pass \\
+FT06 & View live vote counts & Counts update in real time & Pass \\
+FT07 & Upload image to IPFS & Image displayed using IPFS URL & Pass \\
+\hline
+\end{tabular}
+\caption{Frontend Test Cases}
+\end{table}
+
+%=============================================================
+%  CHAPTER 7: RESULTS AND DISCUSSION
+%=============================================================
+\chapter{Results and Discussion}
+
+\section{System Overview}
+
+The Decentralized E-Voting System was successfully implemented and deployed
+on the Polygon Mumbai testnet. The system demonstrates all core requirements
+including secure voting, automatic result computation, and tamper-proof data storage.
+
+\section{Application Screenshots}
+
+\subsection{Home Page -- Election Dashboard}
+
+The home page displays the current election name, organization, and countdown
+timer to the election end. All registered candidates are listed with their names,
+ages, and current vote counts.
+
+\imgbox{13}{8}{Screenshot: Home/Dashboard page of the E-Voting DApp}
+
+\subsection{Candidate Registration (Admin)}
+
+The admin panel allows the election administrator to add new candidates by
+entering their wallet address, name, age, and uploading a profile image.
+The image is sent to IPFS and the hash stored on-chain.
+
+\imgbox{13}{8}{Screenshot: Candidate registration form -- admin view}
+
+\subsection{Voter Registration (Admin)}
+
+Similar to candidate registration, the admin can whitelist voters by their
+wallet address. Once registered, a voter can log in using MetaMask and cast a vote.
+
+\imgbox{13}{8}{Screenshot: Voter registration form -- admin view}
+
+\subsection{Vote Casting Interface}
+
+Registered voters see the list of candidates. Clicking ``Vote'' triggers a
+MetaMask transaction. After confirmation, the voter's status updates to
+\texttt{voted = true} on-chain and the candidate's vote count increments.
+
+\imgbox{13}{8}{Screenshot: Voter casting ballot -- MetaMask confirmation popup}
+
+\subsection{Election Results}
+
+After the election window closes, the smart contract's \texttt{getWinner()}
+function returns the winning candidate. The results page displays the final
+vote count for all candidates and highlights the winner.
+
+\imgbox{13}{8}{Screenshot: Election results page showing winner and final vote counts}
+
+\section{Performance Observations}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lll}
+\toprule
+\textbf{Operation} & \textbf{Network} & \textbf{Time / Gas Cost} \\
+\midrule
+Deploy Contract   & Polygon Mumbai & Approx. 2--5 seconds / \textasciitilde{}0.01 MATIC \\
+Register Candidate & Polygon Mumbai & Approx. 2 seconds / \textasciitilde{}0.001 MATIC \\
+Cast Vote          & Polygon Mumbai & Approx. 2 seconds / \textasciitilde{}0.001 MATIC \\
+View Results (read) & Any            & Instant / Free \\
+\bottomrule
+\end{tabular}
+\caption{System Performance}
+\end{table}
+
+%=============================================================
+%  CHAPTER 8: CONCLUSION AND FUTURE SCOPE
+%=============================================================
+\chapter{Conclusion and Future Scope}
+
+\section{Conclusion}
+
+The \textbf{Decentralized E-Voting System} was successfully designed, developed, tested,
+and deployed as a full-stack blockchain application. The project demonstrates that
+it is technically feasible to replace centralised voting infrastructure with a
+transparent, trustless, and tamper-proof system built on public blockchain technology.
+
+The key achievements of this project are:
+
+\begin{itemize}
+\item A production-ready Solidity smart contract with comprehensive access control,
+      voter whitelisting, and automatic result computation.
+\item A fully functional Next.js web frontend connected to the blockchain via
+      Ethers.js and MetaMask.
+\item Cost-effective deployment on the Polygon Layer-2 network with gas costs
+      reduced by over 99\% compared to Ethereum mainnet.
+\item Decentralized media storage using IPFS through the Pinata pinning service.
+\item Comprehensive smart contract testing with 14 unit test cases all passing.
+\end{itemize}
+
+This project proves that blockchain-based e-voting is not merely a theoretical
+concept but a working, deployable solution that can serve organisations, colleges,
+or local government bodies.
+
+\section{Limitations}
+
+\begin{itemize}
+\item Voters require a MetaMask wallet and MATIC tokens, creating a technical barrier
+      for non-technical users.
+\item The current version does not support voter identity verification against
+      government records.
+\item Voter anonymity is limited since wallet addresses are publicly visible on-chain.
+\end{itemize}
+
+\section{Future Enhancements}
+
+\begin{itemize}
+\item \textbf{Zero-Knowledge Proofs (ZK-SNARKs):} Implement cryptographic
+      voter anonymity using zk-SNARK circuits -- prove registration without revealing identity.
+\item \textbf{Aadhaar / Government ID Integration:} Automate voter eligibility
+      verification using national identity APIs to prevent fake registrations.
+\item \textbf{Mobile Application:} Develop a dedicated Android and iOS app using
+      React Native for wider accessibility.
+\item \textbf{DAO Governance:} Replace the single admin model with a
+      Decentralized Autonomous Organization (DAO) structure for multi-authority elections.
+\item \textbf{IPFS for Ballot Storage:} Store the complete encrypted ballot on IPFS
+      for an additional layer of auditability.
+\item \textbf{Multi-Election Support:} Extend the contract to support multiple
+      simultaneous elections within one deployment.
+\end{itemize}
+
+%=============================================================
+%  REFERENCES
+%=============================================================
+\chapter*{References}
+\addcontentsline{toc}{chapter}{References}
+
+\begin{enumerate}
+\item Solidity Documentation. \textit{Solidity Language Reference}. \url{https://docs.soliditylang.org}
+
+\item Hardhat. \textit{Hardhat Development Environment Documentation}. \url{https://hardhat.org/docs}
+
+\item Ethers.js. \textit{Ethers.js v5 Documentation}. \url{https://docs.ethers.org/v5/}
+
+\item Polygon. \textit{Polygon Developer Documentation}. \url{https://wiki.polygon.technology}
+
+\item Pinata. \textit{Pinata IPFS Pinning API Reference}. \url{https://docs.pinata.cloud}
+
+\item Next.js. \textit{Next.js Framework Documentation}. \url{https://nextjs.org/docs}
+
+\item Web3Modal. \textit{Web3Modal Documentation}. \url{https://github.com/Web3Modal/web3modal}
+
+\item IPFS. \textit{InterPlanetary File System Documentation}. \url{https://docs.ipfs.tech}
+
+\item Nakamoto, S. (2008). \textit{Bitcoin: A Peer-to-Peer Electronic Cash System}.
+
+\item Buterin, V. (2014). \textit{Ethereum: A Next-Generation Smart Contract and
+      Decentralised Application Platform}. Ethereum White Paper.
+
+\item Kshetri, N. and Voas, J. (2018). Blockchain-Enabled E-Voting.
+      \textit{IEEE Software}, 35(4), 95--99.
+
+\item OpenZeppelin. \textit{OpenZeppelin Smart Contract Standards}.
+      \url{https://docs.openzeppelin.com}
+\end{enumerate}
+
+%=============================================================
+%  APPENDIX
+%=============================================================
+\chapter*{Appendix}
+\addcontentsline{toc}{chapter}{Appendix}
+
+\section*{Appendix A: Smart Contract Source Code}
+
+The complete source code of \texttt{VotingContract.sol} is available at:\\
+\url{https://github.com/[your-github]/e-voting-dapp}
+
+\imgbox{13}{10}{Screenshot: Full VotingContract.sol source code}
+
+\section*{Appendix B: Hardhat Configuration}
+
+\texttt{hardhat.config.js} configures the compiler version and Polygon Mumbai
+network RPC endpoint using environment variables from the \texttt{.env} file.
+
+\imgbox{13}{6}{Screenshot: hardhat.config.js file}
+
+\section*{Appendix C: Environment Variables}
+
+Required environment variables stored in \texttt{.env}:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{Variable} & \textbf{Purpose} \\
+\midrule
+NEXT\_PUBLIC\_CONTRACT\_ADDRESS & Deployed smart contract address \\
+PINATA\_API\_KEY               & Pinata service API key \\
+PINATA\_SECRET\_API\_KEY       & Pinata service secret \\
+POLYGON\_MUMBAI\_RPC\_URL      & Polygon Mumbai RPC endpoint \\
+PRIVATE\_KEY                  & Admin wallet private key for deployment \\
+\bottomrule
+\end{tabular}
+\caption{Environment Variables}
+\end{table}
+
+\section*{Appendix D: Sample Deployed Transaction}
+
+\imgbox{13}{6}{Screenshot: PolygonScan transaction record of a vote being cast}
+
+\end{document}

@@ -1,0 +1,153 @@
+\documentclass[aspectratio=169]{beamer}	% TPU recommends 16:9 ratio, 4:3 may require some work with inner theme .sty file
+
+% Style options:
+% light --- light theme (default)
+% dark --- dark theme
+% enlogo --- english TPU logo {default}
+% rulogo --- russian TPU logo
+
+\usetheme[dark]{tpu}		% dark theme used as an example of optional argument
+
+%\usepackage[russian]{babel}		%uncomment this to work in russian
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+
+\usepackage{booktabs}	% good looking tables
+\usepackage{multicol}	% text in multiple columns, useful for side-by-side text and pictures
+
+\hyphenpenalty=10000	% i don’t think hyphenation in presentations is a good idea, feel free to change however you like
+
+\title{Decentralized E-Voting System}
+\subtitle{A Blockchain-Based Solution for Secure Elections}
+\author{Member 1 \and Member 2 \and Member 3 \and Member 4 \and Member 5}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% --- MEMBER 1 ---
+\section{1. Problem Explanation}
+
+\begin{frame}{Current System Vulnerabilities}
+\framesubtitle{Presented by Member 1}
+\begin{itemize}
+    \item \textbf{Centralized Systems:} Traditional voting databases are controlled by a central authority, making them vulnerable to tampering.
+    \item \textbf{Lack of Transparency:} Voters cannot independently verify if their votes were counted correctly or if the final tally is accurate.
+    \item \textbf{Security Risks:} Single points of failure in central servers make systems susceptible to cyberattacks and data breaches.
+    \item \textbf{Trust Issues:} Decreasing public trust in electronic voting machines (EVMs) and online voting platforms.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The Need for a New Paradigm}
+\framesubtitle{Presented by Member 1}
+\begin{itemize}
+    \item \textbf{Immutable Records:} We need a system where, once a vote is cast, it can never be altered or deleted.
+    \item \textbf{Cryptographic Security:} Voters should be authenticated securely without relying on a single central database.
+    \item \textbf{Accessibility vs. Integrity:} Balancing the ease of digital voting with the strict integrity requirements of an election.
+    \item \textbf{Objective:} To build a trustless system where the process itself guarantees fairness.
+\end{itemize}
+\end{frame}
+
+% --- MEMBER 2 ---
+\section{2. Solution Approach}
+
+\begin{frame}{Our Solution: Blockchain E-Voting}
+\framesubtitle{Presented by Member 2}
+\begin{itemize}
+    \item \textbf{Smart Contracts (Solidity):} We developed an automated \texttt{VotingContract} that governs candidate registration, voter whitelisting, and the voting process.
+    \item \textbf{Decentralized State:} Votes are stored as state variables on the blockchain, ensuring immutability.
+    \item \textbf{Time-Bound Elections:} The contract strictly enforces election start and end times, preventing late submissions.
+    \item \textbf{One Person, One Vote:} Cryptographic checks ensure that a registered voter address can only cast a single vote.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{System Architecture \& Integration}
+\framesubtitle{Presented by Member 2}
+\begin{itemize}
+    \item \textbf{Frontend (Next.js):} A responsive web application allowing voters to interact easily with the blockchain.
+    \item \textbf{Web3 Integration (Ethers.js):} Connects the frontend to the blockchain, allowing users to sign transactions via wallets like MetaMask.
+    \item \textbf{Decentralized Storage (IPFS/Pinata):} Candidate and voter images are stored on IPFS rather than a central server, ensuring data availability.
+    \item \textbf{Polygon Network:} Deployed on Polygon Mumbai to handle transactions quickly and cheaply.
+\end{itemize}
+\end{frame}
+
+% --- MEMBER 3 ---
+\section{3. Challenges and Solutions}
+
+\begin{frame}{Challenges Faced During Development}
+\framesubtitle{Presented by Member 3}
+\begin{itemize}
+    \item \textbf{Gas Costs \& Network Congestion:} Deploying and interacting with contracts on Ethereum layer-1 was too expensive.
+    \item \textbf{Decentralized Data Storage:} Storing images directly on the blockchain is extremely costly and inefficient.
+    \item \textbf{Web3 State Management:} Keeping the Next.js frontend synchronized with the blockchain state (like live vote counts) was complex.
+    \item \textbf{Testing \& Debugging:} Tracing errors in Smart Contracts is difficult since the code is immutable after deployment.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{How We Overcame the Challenges}
+\framesubtitle{Presented by Member 3}
+\begin{itemize}
+    \item \textbf{Layer-2 Adoption:} We deployed our contract to Polygon (Mumbai testnet) instead of Ethereum L1, drastically reducing gas fees.
+    \item \textbf{IPFS Integration:} We used Pinata to pin images to the InterPlanetary File System (IPFS) and only stored the resulting hashes on-chain.
+    \item \textbf{React Context API:} We utilized React Context to manage Web3 state globally in our frontend, providing a seamless user experience.
+    \item \textbf{Hardhat \& Chai:} We used Hardhat for local blockchain simulation, allowing us to thoroughly test the contract before testnet deployment.
+\end{itemize}
+\end{frame}
+
+% --- MEMBER 4 ---
+\section{4. Design Choices}
+
+\begin{frame}{Why We Chose Our Tech Stack}
+\framesubtitle{Presented by Member 4}
+\begin{itemize}
+    \item \textbf{Solidity over Rust/Vyper:} Chosen for its widespread adoption, comprehensive documentation, and EVM compatibility.
+    \item \textbf{Next.js over Vanilla React:} It provides Server-Side Rendering (SSR) options, faster load times, and better built-in routing.
+    \item \textbf{MetaMask Wallet:} The industry standard for Web3 authentication, removing the need for us to manage user passwords.
+    \item \textbf{Hardhat over Truffle:} Hardhat offers superior debugging capabilities (like \texttt{console.log} in Solidity) and faster compilation.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Alternatives We Ignored}
+\framesubtitle{Presented by Member 4}
+\begin{itemize}
+    \item \textbf{Traditional SQL/NoSQL Databases:} Ignored because they represent a single point of failure and require trusting the database admin.
+    \item \textbf{Ethereum Mainnet:} Ignored for the initial deployment due to high transaction costs which would deter voter participation.
+    \item \textbf{Centralized Cloud Storage (AWS S3):} Ignored for storing election media. Even if the vote is decentralized, if election data is centralized, the system is compromised. We chose IPFS instead.
+\end{itemize}
+\end{frame}
+
+% --- MEMBER 5 ---
+\section{5. Impact and Future Upgrades}
+
+\begin{frame}{Project Impact \& Key Features}
+\framesubtitle{Presented by Member 5}
+\begin{itemize}
+    \item \textbf{Verifiable Transparency:} Anyone can run a node and verify the election code and vote tally independently.
+    \item \textbf{Tamper-Proof:} Once deployed, neither the creators nor any external hacker can alter the vote count.
+    \item \textbf{Global Accessibility:} Voters can securely cast their votes from anywhere in the world using their digital wallets.
+    \item \textbf{Efficiency:} Automated tallying via Smart Contracts means results are available instantly at election end.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Future Upgrades and Possibilities}
+\framesubtitle{Presented by Member 5}
+\begin{itemize}
+    \item \textbf{Zero-Knowledge Proofs (ZKPs):} Implementing ZK-SNARKs to provide complete voter anonymity while still proving the voter is registered.
+    \item \textbf{Government ID Integration:} Connecting the system with national identity APIs (Aadhaar/SSN based auth) for automated, sybil-resistant voter verification.
+    \item \textbf{Quadratic Voting:} Introducing advanced governance models where voters can express the intensity of their preferences.
+    \item \textbf{Mobile Application:} Porting the Next.js frontend to React Native to create a dedicated E-Voting mobile app.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+    \begin{center}
+        \Huge \textbf{Thank You}\\
+        \vspace{0.5cm}
+        \large Any Questions?
+    \end{center}
+\end{frame}
+
+\end{document}

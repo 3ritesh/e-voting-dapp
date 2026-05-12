@@ -5,10 +5,14 @@ import styles from "./card.module.css";
 const CandidateCard = ({ candidate, totalVotes, index }) => {
     const { vote, currentVoter, electionDetails } = useContext(VoterContext);
 
+    const now = Date.now() / 1000;
+
     const isVotingActive =
         electionDetails &&
-        Date.now() / 1000 >= electionDetails.startTime &&
-        Date.now() / 1000 <= electionDetails.endTime;
+        now >= electionDetails.startTime &&
+        now <= electionDetails.endTime;
+
+    const isEnded = electionDetails && now > electionDetails.endTime;
 
     const hasVoted = currentVoter && currentVoter.voted;
     const isAllowed = currentVoter && currentVoter.allowed === 1;
@@ -61,22 +65,28 @@ const CandidateCard = ({ candidate, totalVotes, index }) => {
                     <span className={styles.metaItem}>🆔 ID: #{candidate.candidateId}</span>
                 </div>
 
-                {/* Vote Count */}
-                <div className={styles.voteSection}>
-                    <div className={styles.voteLabel}>
-                        <span>Votes</span>
-                        <span className={styles.voteCount}>{candidate.voteCount}</span>
+                {/* Vote Count — visible ONLY after election ends */}
+                {isEnded ? (
+                    <div className={styles.voteSection}>
+                        <div className={styles.voteLabel}>
+                            <span>Votes</span>
+                            <span className={styles.voteCount}>{candidate.voteCount}</span>
+                        </div>
+                        <div className={styles.progressBar}>
+                            <div
+                                className={styles.progressFill}
+                                style={{ width: `${progressPercent}%` }}
+                            />
+                        </div>
+                        <div style={{ fontSize: "0.72rem", color: "var(--text-muted)", marginTop: "0.3rem" }}>
+                            {progressPercent}% of total votes
+                        </div>
                     </div>
-                    <div className={styles.progressBar}>
-                        <div
-                            className={styles.progressFill}
-                            style={{ width: `${progressPercent}%` }}
-                        />
+                ) : (
+                    <div className={styles.hiddenResults}>
+                        🔒 Results hidden until election ends
                     </div>
-                    <div style={{ fontSize: "0.72rem", color: "var(--text-muted)", marginTop: "0.3rem" }}>
-                        {progressPercent}% of total votes
-                    </div>
-                </div>
+                )}
 
                 {/* Address */}
                 <div className={styles.address}>{truncate(candidate.address)}</div>

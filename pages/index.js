@@ -167,7 +167,8 @@ const Home = () => {
             <div>
               <h2 className={styles.sectionTitle}>Candidates</h2>
               <p className={styles.sectionSubtitle}>
-                {candidateArray.length} candidate{candidateArray.length !== 1 ? "s" : ""} · {totalVotes} total vote{totalVotes !== 1 ? "s" : ""}
+                {candidateArray.length} candidate{candidateArray.length !== 1 ? "s" : ""}
+                {isEnded ? ` · ${totalVotes} total vote${totalVotes !== 1 ? "s" : ""}` : " · Results hidden until election ends"}
               </p>
             </div>
           </div>
@@ -197,6 +198,26 @@ const Home = () => {
             </div>
           )}
         </div>
+
+        {/* ── Team Credits ──────────────────────────────────────────────────── */}
+        <div className={styles.teamSection}>
+          <p className={styles.teamLabel}>👨‍💻 Developed by</p>
+          <div className={styles.teamGrid}>
+            {[
+              "Ritesh Kumar",
+              "Anuj Kumar",
+              "Ashish Kumar",
+              "Shivam Kumar",
+              "Deochandra Rishideo",
+            ].map((name, i) => (
+              <div key={i} className={styles.teamCard}>
+                <div className={styles.teamAvatar}>{name.charAt(0)}</div>
+                <span className={styles.teamName}>{name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </div>
     </>
   );
